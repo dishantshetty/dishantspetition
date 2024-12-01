@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+<h1>Search Results</h1>
+<div th:if="${#lists.isEmpty(petitions)}">
+    <p>No petitions found.</p>
+</div>
+<ul th:if="${!#lists.isEmpty(petitions)}">
+    <li th:each="petition : ${petitions}">
+        <a th:href="@{/view-petition/{title}(title=${petition.title})}" th:text="${petition.title}"></a>
+    </li>
+</ul>
+<br>
+<a href="/search-petition">Back to Search</a>
+<br>
+<a href="/view-all-petitions">Back to All Petitions</a>
+</body>
+</html>
