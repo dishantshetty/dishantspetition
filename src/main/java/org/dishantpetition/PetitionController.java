@@ -14,6 +14,12 @@ public class PetitionController {
     @Autowired
     private PetitionService petitionService;
 
+
+    // Redirect from root to "/home"
+    @RequestMapping("/")
+    public String redirectToHome() {
+        return "redirect:/view-all-petitions";
+    }
     @GetMapping("/create-petition")
     public String createPetitionPage() {
         return "create-petition";
