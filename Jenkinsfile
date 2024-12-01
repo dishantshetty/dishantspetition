@@ -43,7 +43,7 @@ pipeline {
 
                     if [[ "" !=  "$processId" ]]; then
                       echo "killing $processId"
-                      kill -9 $processId
+                      sudo kill -9 $processId
                     fi
 
                     nohup java -jar /opt/tomcat/webapps/petition.jar >> /opt/tomcat/webapps/log.log  &
