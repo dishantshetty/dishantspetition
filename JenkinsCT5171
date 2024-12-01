@@ -1,0 +1,56 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Cloning repository...'
+                git branch: 'main', url: 'https://github.com/dishantshetty/dishantspetition.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building the application...'
+                sh './mvnw clean compile'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                sh './mvnw test'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                echo 'Packaging the application...'
+                sh './mvnw package'
+                archiveArtifacts artifacts: 'target/dishantspetitions.war', fingerprint: true
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    input message: 'Deploy to server?'
+                    echo 'Deploying to EC2...'
+                    sh '''
+                    scp -i /Users/dishantshetty/Downloads/ct5171.pem target/dishantspetitions.war ec2-user@3.249.117.117:/var/lib/tomcat9/webapps/
+                    ssh -i /path/to/your/key.pem ec2-user@3.249.117.117 "sudo systemctl restart tomcat9"
+                    '''
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and deployment completed successfully!'
+        }
+        failure {
+            echo 'Build or deployment failed!'
+        }
+    }
+}
