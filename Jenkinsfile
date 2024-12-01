@@ -37,8 +37,8 @@ pipeline {
                     input message: 'Deploy to server?'
                     echo 'Deploying to EC2...'
                     sh '''
-                    scp -i /Users/dishantshetty/Downloads/ct5171.pem target/dishantspetitions-0.0.1-SNAPSHOT.war ec2-user@176.34.238.129:/var/lib/tomcat9/webapps/
-                    ssh -i /path/to/your/key.pem ec2-user@176.34.238.129 "sudo systemctl restart tomcat9"
+                    scp -i ./ct5171.pem target/dishantspetitions-0.0.1-SNAPSHOT.war ec2-user@176.34.238.129:/var/lib/tomcat9/webapps/
+                    ssh -i ./ct5171.pem ec2-user@176.34.238.129 "sudo systemctl restart tomcat9"
                     '''
                 }
 
