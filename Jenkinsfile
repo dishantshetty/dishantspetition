@@ -37,7 +37,7 @@ pipeline {
                     input message: 'Deploy to server?'
                     echo 'Deploying to EC2...'
                     sh '''
-                    cp target/dishantspetitions-0.0.1-SNAPSHOT.war /opt/tomcat/webapps/
+                    cp target/dishantspetitions-0.0.1-SNAPSHOT.war /opt/tomcat/webapps/petition.war
                     sudo systemctl restart tomcat
                     '''
                 }
