@@ -46,7 +46,7 @@ pipeline {
                       sudo kill -9 $processId
                     fi
 
-                    nohup java -jar /opt/tomcat/webapps/petition.jar >> /opt/tomcat/webapps/log.log  &
+                    sudo nohup java -jar /opt/tomcat/webapps/petition.jar >> /opt/tomcat/webapps/log.log  &
                     '''
                 }
 
