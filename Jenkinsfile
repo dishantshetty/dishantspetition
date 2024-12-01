@@ -38,7 +38,15 @@ pipeline {
                     echo 'Deploying to EC2...'
                     sh '''
                     cp target/dishantspetitions-0.0.1-SNAPSHOT.jar /opt/tomcat/webapps/petition.jar
-                    java -jar /opt/tomcat/webapps/petition.jar
+                    processId=$(ps -ef | grep 'petition' | grep -v 'grep' | awk '{ printf $2 }')
+                    echo $processId
+
+                    if [[ "" !=  "$processId" ]]; then
+                      echo "killing $processId"
+                      kill -9 $processId
+                    fi
+
+                    nohup java -jar /opt/tomcat/webapps/petition.jar > log.log  &
                     '''
                 }
 
