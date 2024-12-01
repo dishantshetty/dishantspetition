@@ -7,7 +7,7 @@
     <groupId>org.dishantpetition</groupId>
     <artifactId>dishantspetitions</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>dishantspetitions</name>
     <description>Dishant's petition management system</description>

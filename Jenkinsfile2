@@ -27,7 +27,7 @@ pipeline {
             steps {
                 echo 'Packaging the application...'
                 sh 'mvn package'
-                archiveArtifacts artifacts: 'target/dishantspetitions-0.0.1-SNAPSHOT.jar', fingerprint: true
+                archiveArtifacts artifacts: 'target/dishantspetitions-0.0.1-SNAPSHOT.war', fingerprint: true
             }
         }
 
@@ -37,8 +37,8 @@ pipeline {
                     input message: 'Deploy to server?'
                     echo 'Deploying to EC2...'
                     sh '''
-                    cp target/dishantspetitions-0.0.1-SNAPSHOT.jar /opt/tomcat/webapps/petition.jar
-                    java -jar /opt/tomcat/webapps/petition.jar
+                    cp target/dishantspetitions-0.0.1-SNAPSHOT.war /opt/tomcat/webapps/petition.war
+                    sudo systemctl restart tomcat
                     '''
                 }
 
