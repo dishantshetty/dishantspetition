@@ -46,7 +46,7 @@ pipeline {
                       kill -9 $processId
                     fi
 
-                    nohup java -jar /opt/tomcat/webapps/petition.jar > /opt/tomcat/webapps/log.log  &
+                    nohup java -jar /opt/tomcat/webapps/petition.jar >> /opt/tomcat/webapps/log.log  &
                     '''
                 }
 
