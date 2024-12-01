@@ -11,8 +11,8 @@ public class PetitionService {
     private final List<Petition> petitions = new ArrayList<>();
 
     public PetitionService() {
-        petitions.add(new Petition("Save the Forest", "A petition to save the Amazon rainforest"));
-        petitions.add(new Petition("Save the Oceans", "A petition to reduce ocean pollution"));
+        petitions.add(new Petition("Global Warming", "A petition to reduce climate change"));
+        petitions.add(new Petition("Save rhinos", "A petition to stop poaching of Rhinos"));
     }
 
     public List<Petition> getAllPetitions() {

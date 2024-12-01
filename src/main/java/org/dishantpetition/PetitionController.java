@@ -46,6 +46,8 @@ public class PetitionController {
         return "search-results";
     }
 
+
+
     @GetMapping("/view-petition/{title}")
     public String viewPetition(@PathVariable String title, Model model) {
         Petition petition = petitionService.getPetitionByTitle(title);
