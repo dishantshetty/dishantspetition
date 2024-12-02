@@ -37,7 +37,7 @@ pipeline {
                     input message: 'Deploy to server?'
                     echo 'Deploying to EC2...'
                     sh '''
-                    cp target/dishantspetitions-0.0.1-SNAPSHOT.jar /opt/tomcat/webapps/petition.jar
+                    sudo cp target/dishantspetitions-0.0.1-SNAPSHOT.jar /opt/tomcat/webapps/petition.jar
                     processId=$(ps -ef | grep 'petition' | grep -v 'grep' | awk '{ printf $2 }')
                     echo $processId
 
