@@ -53,8 +53,11 @@ pipeline {
                       echo "No valid process found or invalid process ID"
                     fi
 
-
-                    sudo nohup java -jar /opt/tomcat/webapps/petition.jar >> /opt/tomcat/webapps/log.log  &
+                    sudo nohup java -jar /opt/tomcat/webapps/petition.jar >> /opt/tomcat/webapps/log.log &
+                      echo "Application deployed and running."
+                    else
+                      echo "Deployment aborted."
+                    fi
                     '''
                 }
 
