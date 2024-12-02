@@ -38,6 +38,7 @@ pipeline {
                     echo 'Deploying to EC2...'
                     sh '''
                     sudo cp target/dishantspetitions-0.0.1-SNAPSHOT.jar /opt/tomcat/webapps/petition.jar
+                    unset processId  # Clear the variable
                     processId=$(ps -ef | grep 'petition' | grep -v 'grep' | awk '{ printf $2 }')
                     echo $processId
 
