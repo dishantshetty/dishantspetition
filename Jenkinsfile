@@ -43,21 +43,22 @@ pipeline {
                     # Get the process ID of the running 'petition' process
                     processId=$(ps -ef | grep 'petition' | grep -v 'grep' | awk '{ print $2 }')
 
-                    # Check if a valid PID exists
+                    # Kill the process if a valid PID exists
                     if [[ -n "$processId" && "$processId" =~ ^[0-9]+$ ]]; then
                       echo "killing $processId"
                       sudo kill -9 "$processId"
-                      unset processId  # Clear the variable
                       echo "Process ID cleared."
                     else
                       echo "No valid process found or invalid process ID"
                     fi
 
-                    sudo nohup java -jar /opt/tomcat/webapps/petition.jar >> /opt/tomcat/webapps/log.log &
-                      echo "Application deployed and running."
-                    else
-                      echo "Deployment aborted."
-                    fi
+                    # Ensure log file permissions
+                    sudo touch /opt/tomcat/webapps/log.log
+                    sudo chmod 666 /opt/tomcat/webapps/log.log
+
+                    # Start the application
+                    sudo nohup java -jar /opt/tomcat/webapps/petition.jar >> /opt/tomcat/webapps/log.log 2>&1 &
+                    echo "Application deployed and running."
                     '''
                 }
 
