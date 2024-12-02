@@ -37,17 +37,22 @@ pipeline {
                     input message: 'Deploy to server?'
                     echo 'Deploying to EC2...'
                     sh '''
+                    # Copy the jar file
                     sudo cp target/dishantspetitions-0.0.1-SNAPSHOT.jar /opt/tomcat/webapps/petition.jar
-                    unset processId  # Clear the variable
-                    processId=$(ps -ef | grep 'petition' | grep -v 'grep' | awk '{ printf $2 }')
-                    echo $processId
 
-                    if [[ "" !=  "$processId" ]]; then
+                    # Get the process ID of the running 'petition' process
+                    processId=$(ps -ef | grep 'petition' | grep -v 'grep' | awk '{ print $2 }')
+
+                    # Check if a valid PID exists
+                    if [[ -n "$processId" && "$processId" =~ ^[0-9]+$ ]]; then
                       echo "killing $processId"
-                      sudo kill -9 $processId
+                      sudo kill -9 "$processId"
                       unset processId  # Clear the variable
                       echo "Process ID cleared."
+                    else
+                      echo "No valid process found or invalid process ID"
                     fi
+
 
                     sudo nohup java -jar /opt/tomcat/webapps/petition.jar >> /opt/tomcat/webapps/log.log  &
                     '''
