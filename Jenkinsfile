@@ -44,6 +44,8 @@ pipeline {
                     if [[ "" !=  "$processId" ]]; then
                       echo "killing $processId"
                       sudo kill -9 $processId
+                      unset processId  # Clear the variable
+                      echo "Process ID cleared."
                     fi
 
                     sudo nohup java -jar /opt/tomcat/webapps/petition.jar >> /opt/tomcat/webapps/log.log  &
