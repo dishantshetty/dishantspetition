@@ -2,35 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Petition</title>
 </head>
-<body style="background-color:powderblue; font-family: Arial, sans-serif; color: #333; line-height: 1.6; padding: 20px;">
-<h1 style="color: #2c3e50; font-size: 2rem; margin-bottom: 15px;" th:text="${petition.title}"></h1>
-<p style="font-size: 1.2rem; margin-bottom: 30px;" th:text="${petition.description}"></p>
+<body style="background-color:powderblue;" >
+<h1 th:text="${petition.title}"></h1>
+<p th:text="${petition.description}"></p>
 
-<h2 style="color: #2c3e50; margin-bottom: 20px;">Sign this Petition</h2>
-<form th:action="@{/sign-petition/{title}(title=${petition.title})}" method="post" style="background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); max-width: 500px; margin: 20px auto;">
-    <div style="margin-bottom: 15px;">
-        <label for="name" style="font-weight: bold;">Name:</label>
-        <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;" />
-    </div>
-    <div style="margin-bottom: 15px;">
-        <label for="email" style="font-weight: bold;">Email:</label>
-        <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;" />
-    </div>
-    <button type="submit" style="background-color: #3498db; color: white; border: none; padding: 12px; width: 100%; border-radius: 4px; font-size: 1.1rem; cursor: pointer;">Sign Petition</button>
+<h2>Sign this Petition</h2>
+<form th:action="@{/sign-petition/{title}(title=${petition.title})}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required />
+
+    <button type="submit">Sign Petition</button>
 </form>
 
-<h3 style="margin-top: 30px; color: #2c3e50;">Petition Signatures</h3>
-<ul style="list-style-type: none; padding-left: 0;">
-    <li th:each="signature : ${petition.signatures}" style="background-color: #ecf0f1; padding: 10px; margin-bottom: 10px; border-radius: 4px;">
-        <span th:text="${signature.name}" style="font-weight: bold;">Name</span> -
+
+<h3>Petition Signatures</h3>
+<ul>
+    <li th:each="signature : ${petition.signatures}">
+        <span th:text="${signature.name}">Name</span> -
         <span th:text="${signature.email}">Email</span>
     </li>
 </ul>
 
 <br>
-<a href="/view-all-petitions" style="color: #3498db; text-decoration: none; font-size: 1.1rem;">Back to all petitions</a>
+<a href="/view-all-petitions">Back to all petitions</a>
 </body>
 </html>
